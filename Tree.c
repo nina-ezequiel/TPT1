@@ -8,30 +8,30 @@ tData copy_tData(tData original) {
 	tData copia = newNodeTree(original->nodeType);
 	switch(original->nodeType) {
 		
-	case STR:
-		copia->str = copyStr(original->str);
-		break;
-		
-	case LIST:
-	case SET: {
-		tData actual = original->data;
-		tData inicio = NULL;
-		tData fin = NULL;		
-		while (actual != NULL) {
-			tData elemCopia = copy_tData(actual);
-			if (inicio == NULL) {
-				inicio = elemCopia;
-				fin = elemCopia;
-			} 
-			else {
-				fin->next = elemCopia;
-				fin = elemCopia;
+		case STR:
+			copia->str = copyStr(original->str);
+			break;
+			
+		case LIST:
+		case SET: {
+			tData actual = original->data;
+			tData inicio = NULL;
+			tData fin = NULL;		
+			while (actual != NULL) {
+				tData elemCopia = copy_tData(actual);
+				if (inicio == NULL) {
+					inicio = elemCopia;
+					fin = elemCopia;
+				} 
+				else {
+					fin->next = elemCopia;
+					fin = elemCopia;
+				}
+				actual = actual->next;
 			}
-			actual = actual->next;
+			copia->data = inicio;
+			break;
 		}
-		copia->data = inicio;
-		break;
-	}
 	}
 	return copia;
 }
@@ -42,25 +42,25 @@ int equal_tData(tData elem1, tData elem2) {
 	if (elem1->nodeType != elem2->nodeType) 
 		return 0;
 	switch(elem1->nodeType) {
-		
-	case STR:
-		return equalStr(elem1->str, elem2->str);
-		
-	case LIST: {
-		tData actual1 = elem1->data;
-		tData actual2 = elem2->data;
-		
-		while (actual1 != NULL && actual2 != NULL) {
-			if (!equal_tData(actual1, actual2)) 
-				return 0;
-			actual1 = actual1->next;
-			actual2 = actual2->next;
+			
+		case STR:
+			return equalStr(elem1->str, elem2->str);
+			
+		case LIST: {
+			tData actual1 = elem1->data;
+			tData actual2 = elem2->data;
+			
+			while (actual1 != NULL && actual2 != NULL) {
+				if (!equal_tData(actual1, actual2)) 
+					return 0;
+				actual1 = actual1->next;
+				actual2 = actual2->next;
+			}
+			
+			return (actual1 == NULL && actual2 == NULL);
 		}
-		
-		return (actual1 == NULL && actual2 == NULL);
-	}
-	case SET:
-		return inclusionSet(elem1, elem2) && inclusionSet(elem2, elem1);
+		case SET:
+			return inclusionSet(elem1, elem2) && inclusionSet(elem2, elem1);
 	}
 	
 	return 0;
@@ -105,24 +105,24 @@ tData newNodeList() {
 		tData ElementoLista = NULL;
 		switch(opcion) {
 			
-		case 1:
-			ElementoLista = newNodeStr();
-			break;
-			
-		case 2:
-			ElementoLista = newNodeList();
-			break;
-			
-		case 3:
-			ElementoLista = newNodeSet();
-			break;
-			
-		case 4:
-			break;
-			
-		default:
-			printf("Opcion no valida.\n");
-			continue;
+			case 1:
+				ElementoLista = newNodeStr();
+				break;
+				
+			case 2:
+				ElementoLista = newNodeList();
+				break;
+				
+			case 3:
+				ElementoLista = newNodeSet();
+				break;
+				
+			case 4:
+				break;
+				
+			default:
+				printf("Opcion no valida.\n");
+				continue;
 		}
 		
 		if (ElementoLista != NULL)
@@ -150,24 +150,24 @@ tData newNodeSet() {
 		
 		switch(opcion) {
 			
-		case 1:
-			ElementoSet = newNodeStr();
-			break;
-			
-		case 2:
-			ElementoSet = newNodeList();
-			break;
-			
-		case 3:
-			ElementoSet = newNodeSet();
-			break;
-			
-		case 4:
-			break;
-			
-		default:
-			printf("Opcion no valida.\n");
-			continue;
+			case 1:
+				ElementoSet = newNodeStr();
+				break;
+				
+			case 2:
+				ElementoSet = newNodeList();
+				break;
+				
+			case 3:
+				ElementoSet = newNodeSet();
+				break;
+				
+			case 4:
+				break;
+				
+			default:
+				printf("Opcion no valida.\n");
+				continue;
 		}
 		
 		if (ElementoSet != NULL) {
@@ -226,19 +226,19 @@ void printDataRecursive(tData data) {
 		}
 		firstElement = 0;
 		switch(data->nodeType) {
-		case STR:
-			printStr(data->str);
-			break;
-		case LIST:
-			printf("[");
-			printDataRecursive(data->data);
-			printf("]");
-			break;
-		case SET:
-			printf("{");
-			printDataRecursive(data->data);
-			printf("}");
-			break;
+			case STR:
+				printStr(data->str);
+				break;
+			case LIST:
+				printf("[");
+				printDataRecursive(data->data);
+				printf("]");
+				break;
+			case SET:
+				printf("{");
+				printDataRecursive(data->data);
+				printf("}");
+				break;
 		}
 		data = data->next;
 	}
@@ -533,7 +533,7 @@ tData strToSet(tData string) {
 tData setToStr(tData set) {
 	if (set == NULL || set->nodeType != SET)
 		return NULL;
-	str resultadoStr = createStr();  // string vacío
+	str resultadoStr = createStr(); 
 	tData actual = set->data;
 	while (actual != NULL) {
 		if (actual->nodeType == STR) {
