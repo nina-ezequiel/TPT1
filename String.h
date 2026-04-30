@@ -7,9 +7,6 @@ typedef struct nodo {
 } T_nodo;
 typedef T_nodo* str;
 
-
-// Modulos Pedidos
-
 str createStr(); 						// Crea y retorna una cadena vacía (str = NULL)
 str loadStr(); 							// Carga una cadena desde el ingreso por teclado
 str loadStr2(const char* cadena); 		// Crea una cadena a partir de una cadena previamente escrita (const char*)
