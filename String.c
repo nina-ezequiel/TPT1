@@ -8,7 +8,6 @@ str crearNodo(char c) {
 	return nvo;
 }
 
-
 // libera memoria
 void freeStr(str *s) {
 	while (*s != NULL) {
@@ -19,12 +18,10 @@ void freeStr(str *s) {
 	*s = NULL;
 }
 
-
 // Crea cadena vacía
 str createStr() {
 	return NULL;
 }
-
 
 // Lee cadena desde teclado
 str loadStr() {
@@ -44,7 +41,6 @@ str loadStr() {
 	return ini;
 }
 
-
 // Crea cadena desde const char*
 str loadStr2(const char* cadena) {
 	str ini = NULL;
@@ -62,7 +58,6 @@ str loadStr2(const char* cadena) {
 	return ini;
 }
 
-
 // Muestra la cadena
 void printStr(str s) {
 	if(s != NULL){
@@ -78,7 +73,6 @@ void printStr(str s) {
 		printf("\nString Vacio ...");
 	}
 }
-
 
 // Copia una cadena
 str copyStr(str s){
@@ -99,8 +93,7 @@ str copyStr(str s){
 	}
 	return ini;
 }
-	
-	
+		
 // Concatena dos cadenas
 str concatStr(str s1, str s2) {
 	str cop1 = copyStr(s1);
@@ -122,7 +115,6 @@ str concatStr(str s1, str s2) {
 	
 	return cop1;
 }
-
 
 // Parte antes del token
 str beforeToken(str s, char token) {
@@ -146,7 +138,6 @@ str beforeToken(str s, char token) {
 	}
 	return ini;
 }
-
 
 // Parte después del token
 str afterToken(str s, char token) {
@@ -176,7 +167,6 @@ str afterToken(str s, char token) {
 	return ini;
 }
 
-
 // Verifica si s2 está en s1
 int isinStr(str s1, str s2) {
 	if (s2 == NULL) 
@@ -200,6 +190,7 @@ int isinStr(str s1, str s2) {
 	return 0;
 }
 
+// Verifica si s1 y s2 son iguales
 int equalStr(str s1,str s2){
 	if(isinStr(s1,s2) && isinStr(s2,s1))
 		return 1;
@@ -207,6 +198,7 @@ int equalStr(str s1,str s2){
 		return 0;
 }
 
+// Retorna tamanio del string
 int sizeStr(str s){
 	int c = 0;
 	while(s != NULL){
@@ -216,7 +208,7 @@ int sizeStr(str s){
 	return c;
 }
 
-// Función auxiliar para limpiar buffer
+// limpia buffer
 void limpiarBuffer() {
 	int c;
 	while ((c = getchar()) != '\n' && c != EOF);
