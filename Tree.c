@@ -193,7 +193,7 @@ void insert_set(tData *coleccion,tData elemento){
 		actual = actual->next;
 	}
 	if (existe) {
-		printf("\nElemento ya existe en el conjunto. No se agregara.");
+		printf("\nElemento ya existe en el conjunto. No se agregara.\n");
 		free_tData(elemento);
 	} 
 	else
@@ -314,10 +314,8 @@ tData unionSet(tData set1, tData set2) {
 	// Agregar elementos de set2 que no estén ya
 	actual = (set2 != NULL) ? set2->data : NULL;
 	while (actual != NULL) {
-		if (!pertainSet(actual, resultado)) {
-			tData copia = copy_tData(actual);
-			append(&(resultado->data), copia);
-		}
+		tData copia = copy_tData(actual);
+		insert_set(&(resultado->data), copia);
 		actual = actual->next;
 	}
 	return resultado;
@@ -342,8 +340,6 @@ tData differenceSet(tData set1, tData set2) {
 	if (set1 == NULL) 
 		return NULL;
 	tData resultado = newNodeTree(SET);
-	if (resultado == NULL) 
-		return NULL;
 	tData actual = set1->data;
 	while (actual != NULL) {
 		if (set2 == NULL || !pertainSet(actual, set2)) {
@@ -412,7 +408,6 @@ tData newEmptyNodeSet() {
 	return nvo;
 }
 
-
 /* --------------------------------------------------------------------- */
 
 tData concatData(tData l1, tData l2) {
@@ -435,7 +430,6 @@ tData concatData(tData l1, tData l2) {
 		append(&(resultado->data), copia);
 		actual = actual->next;
 	}
-	
 	return resultado;
 }
 
@@ -447,12 +441,10 @@ tData search(tData list, tData elem) {
 	tData actual = list->data;
 	while (actual != NULL) {
 		if (equal_tData(actual, elem)) {
-			// Retornar copia del elemento encontrado
-			return copy_tData(actual);
+			return copy_tData(actual); // Retorna copia de elemento encontrado
 		}
 		actual = actual->next;
 	}
-	
 	return NULL; // No encontrado
 }
 
