@@ -288,7 +288,7 @@ void demostracionCompleta() {
 	tData prodCart4 = cartesianProduct(listaDup1, listaDup2);
 	printf("Producto Cartesiano (Lista1 X Lista2): ");
 	printData(prodCart4);
-	printf("Los pares duplicados se evitan automaticamente por ser un SET...\n");
+	printf("Nota: Los pares duplicados se evitan automaticamente por ser un SET.\n");
 	
 	free_tData(listaDup1);
 	free_tData(listaDup2);
